@@ -1,0 +1,198 @@
+:root{
+  --bg1:#f2efff;
+  --bg2:#8b7cff;
+  --card:#ffffff;
+  --text:#0f1222;
+  --muted:#6b6f86;
+  --shadow: 0 14px 40px rgba(15, 18, 34, 0.14);
+  --radius: 22px;
+  --accent:#6b5cff;
+  --track:#e9eaf2;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+*{ box-sizing:border-box; }
+
+html,body{
+  height:100%;
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto,
+               "PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  color:var(--text);
+}
+
+body{
+  background:
+    radial-gradient(1200px 700px at 50% 20%,
+      rgba(255,255,255,.85) 0%,
+      rgba(255,255,255,.25) 55%,
+      rgba(255,255,255,0) 70%),
+    linear-gradient(180deg,var(--bg1),var(--bg2));
+  overflow-x:hidden;
+}
+
+.app{
+  min-height:100%;
+  padding: calc(18px + var(--safe-top)) 16px
+           calc(18px + var(--safe-bottom));
+  max-width:520px;
+  margin:0 auto;
+}
+
+header{
+  padding:6px 2px 18px;
+}
+
+.title{
+  margin:0 0 6px;
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:-0.02em;
+}
+
+.subtitle{
+  margin:0;
+  font-size:13.5px;
+  color:rgba(15,18,34,.65);
+}
+
+.feed{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.card{
+  width:min(86vw,420px);
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:16px;
+  position:relative;
+  overflow:hidden;
+}
+
+.card.left{ align-self:flex-start; }
+.card.right{ align-self:flex-end; }
+
+.card::before{
+  content:"";
+  position:absolute;
+  top:-40px;
+  right:-60px;
+  width:160px;
+  height:160px;
+  background:radial-gradient(circle,
+    rgba(107,92,255,.22),
+    rgba(107,92,255,0) 70%);
+  transform:rotate(18deg);
+}
+
+.row{
+  display:flex;
+  gap:12px;
+}
+
+.icon{
+  width:44px;
+  height:44px;
+  border-radius:16px;
+  background:linear-gradient(
+    180deg,
+    rgba(107,92,255,.22),
+    rgba(107,92,255,.08));
+  display:grid;
+  place-items:center;
+  flex-shrink:0;
+}
+
+.icon svg{
+  width:22px;
+  height:22px;
+}
+
+.meta{
+  flex:1;
+}
+
+.game-title{
+  margin:0 0 4px;
+  font-size:16px;
+  font-weight:780;
+}
+
+.desc{
+  margin:0 0 10px;
+  font-size:12.8px;
+  color:rgba(15,18,34,.7);
+}
+
+.chips{
+  list-style:none;
+  padding:0;
+  margin:0 0 10px;
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+
+.chip{
+  font-size:11.5px;
+  padding:5px 8px;
+  border-radius:999px;
+  background:rgba(15,18,34,.06);
+}
+
+.progress-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.progress{
+  flex:1;
+}
+
+.progress-label{
+  display:flex;
+  justify-content:space-between;
+  font-size:11.5px;
+  color:rgba(15,18,34,.6);
+  margin-bottom:6px;
+}
+
+.bar{
+  height:8px;
+  background:var(--track);
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.bar i{
+  display:block;
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--accent),rgba(107,92,255,.55));
+  transition:width .4s ease;
+}
+
+.btn{
+  border:none;
+  border-radius:14px;
+  padding:10px 12px;
+  font-size:12.5px;
+  font-weight:740;
+  background:linear-gradient(180deg,var(--accent),rgba(107,92,255,.8));
+  color:white;
+  cursor:pointer;
+}
+
+.btn.secondary{
+  background:rgba(15,18,34,.08);
+  color:rgba(15,18,34,.85);
+}
+
+.footer-space{
+  height:18px;
+}

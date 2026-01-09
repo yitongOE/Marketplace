@@ -1,5 +1,3 @@
-const feed = document.getElementById("feed");
-
 const TOTAL_CHAPTERS = 6;
 const LESSONS_PER_CHAPTER = 5;
 
@@ -61,63 +59,76 @@ function renderSegments(completedChapters) {
   return html;
 }
 
-function render() {
-  feed.innerHTML = "";
+document.addEventListener("DOMContentLoaded", () => {
+  const leftCol = document.getElementById("col-left");
+  const rightCol = document.getElementById("col-right");
 
-  games.forEach((g, i) => {
-    const hasProgress = typeof g.progress === "number";
-    const completedChapters = clampChapters(hasProgress ? g.progress : 0);
-    const range = getLessonRange(completedChapters);
-    const buttonState = getButtonState(completedChapters);
+  if (!leftCol || !rightCol) {
+    console.error("Missing #col-left or #col-right in index.html");
+    return;
+  }
+  
+  function render() {
+    leftCol.innerHTML = "";
+    rightCol.innerHTML = "";
 
-    const card = document.createElement("article");
-    card.className = "card";
+    games.forEach((g, i) => {
+      const hasProgress = typeof g.userdata_progress === "number";
+      const completedChapters = clampChapters(hasProgress ? g.userdata_progress : 0);
+      const range = getLessonRange(completedChapters);
+      const buttonState = getButtonState(completedChapters);
 
-    card.innerHTML = `
-      <div class="row">
-        <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 22 22">${iconSVG(i)}</svg>
-        </div>
+      const card = document.createElement("article");
+      card.className = "card";
 
-        <div class="meta">
-          <h2 class="game-title">${g.title}</h2>
-          <p class="desc">${g.desc}</p>
+      card.innerHTML = `
+        <div class="row">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 22 22">${iconSVG(i)}</svg>
+          </div>
 
-          <ul class="chips" aria-label="game tags">
-            ${g.tags.map(t => `<li class="chip">${t}</li>`).join("")}
-          </ul>
+          <div class="meta">
+            <h2 class="game-title">${g.title}</h2>
+            <p class="desc">${g.desc}</p>
 
-          <div class="progress-wrap">
-            <div class="progress" style="${hasProgress ? "" : "display:none"}" aria-label="lesson progress">
-              <div class="progress-label">
-                <span>Lesson ${range.start}–${range.end}</span>
-                <span>${completedChapters}/${TOTAL_CHAPTERS}</span>
+            <ul class="chips" aria-label="game tags">
+              ${g.tags.map(t => `<li class="chip">${t}</li>`).join("")}
+            </ul>
+
+            <div class="progress-wrap">
+              <div class="progress" style="${hasProgress ? "" : "display:none"}" aria-label="lesson progress">
+                <div class="progress-label">
+                  <span>Lesson ${range.start}–${range.end}</span>
+                  <span>${completedChapters}/${TOTAL_CHAPTERS}</span>
+                </div>
+
+                <div class="segbar"
+                    role="progressbar"
+                    aria-valuemin="0"
+                    aria-valuemax="${TOTAL_CHAPTERS}"
+                    aria-valuenow="${completedChapters}"
+                    aria-label="Chapters completed">
+                  ${renderSegments(completedChapters)}
+                </div>
               </div>
 
-              <div class="segbar"
-                   role="progressbar"
-                   aria-valuemin="0"
-                   aria-valuemax="${TOTAL_CHAPTERS}"
-                   aria-valuenow="${completedChapters}"
-                   aria-label="Chapters completed">
-                ${renderSegments(completedChapters)}
-              </div>
+              <button class="btn ${buttonState.className}" type="button">
+                ▶ ${buttonState.label}
+              </button>
             </div>
-
-            <button class="btn ${buttonState.className}" type="button">
-              ▶ ${buttonState.label}
-            </button>
           </div>
         </div>
-      </div>
-    `;
+      `;
 
-    card.onclick = () => {
-      window.location.href = g.url;
-    };
+      card.onclick = () => {
+        window.location.href = g.url;
+      };
 
-    feed.appendChild(card);
-  });
-}
+      if (i % 2 === 0) leftCol.appendChild(card);
+      else rightCol.appendChild(card);
+    });
+  }
 
-render();
+  render();
+});
+

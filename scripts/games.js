@@ -4,7 +4,7 @@ const games = [
     title: "Word Splash",
     desc: "Fast-paced vocabulary matching to build word intuition.",
     tags: ["Vocabulary", "Speed", "Beginner"],
-    progress: 4,
+    userdata_progress: 4,
     url: "https://yitongoe.itch.io/word-splash"
   },
   {
@@ -12,7 +12,7 @@ const games = [
     title: "Sentence Builder",
     desc: "Arrange words into correct sentences to practice grammar.",
     tags: ["Grammar", "Logic"],
-    progress: 2,
+    userdata_progress: 2,
     url: "https://yitongoe.itch.io/oesb"
   },
   {
@@ -20,7 +20,7 @@ const games = [
     title: "Bubble Pop",
     desc: "Catch the bubble with target words",
     tags: ["Vocabulary", "Speed", "Beginner"],
-    progress: 0,
+    userdata_progress: 0,
     url: "#"
   },
   {
@@ -28,7 +28,7 @@ const games = [
     title: "Placeholder 1",
     desc: "This is a placeholder card",
     tags: ["Listening"],
-    progress: 1,
+    userdata_progress: 1,
     url: "#"
   },
   {
@@ -36,7 +36,7 @@ const games = [
     title: "Placeholder 2",
     desc: "This is a placeholder card",
     tags: ["Listening"],
-    progress: 2,
+    userdata_progress: 2,
     url: "#"
   },
   {
@@ -44,7 +44,7 @@ const games = [
     title: "Placeholder 3",
     desc: "This is a placeholder card",
     tags: ["Listening"],
-    progress: 6,
+    userdata_progress: 6,
     url: "#"
   },
   {
@@ -52,7 +52,7 @@ const games = [
     title: "Placeholder 4",
     desc: "This is a placeholder card",
     tags: ["Listening"],
-    progress: 6,
+    userdata_progress: 6,
     url: "#"
   },
   {
@@ -60,7 +60,7 @@ const games = [
     title: "Placeholder 5",
     desc: "This is a placeholder card",
     tags: ["Listening"],
-    progress: 6,
+    userdata_progress: 6,
     url: "#"
   },
   {
@@ -68,7 +68,7 @@ const games = [
     title: "Placeholder 6",
     desc: "This is a placeholder card",
     tags: ["Listening"],
-    progress: 6,
+    userdata_progress: 6,
     url: "#"
   },
 ];

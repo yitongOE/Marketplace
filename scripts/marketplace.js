@@ -1,6 +1,9 @@
 const feed = document.getElementById("feed");
 
-function iconSVG(index){
+const TOTAL_CHAPTERS = 6;
+const LESSONS_PER_CHAPTER = 5;
+
+function iconSVG(index) {
   const shapes = [
     `<circle cx="11" cy="11" r="7" fill="rgba(107,92,255,.25)" />`,
     `<rect x="5" y="5" width="12" height="12" fill="rgba(107,92,255,.25)" />`,
@@ -9,36 +12,76 @@ function iconSVG(index){
   return shapes[index % shapes.length];
 }
 
-function render(){
+// progress = completed chapters (0..6)
+// Display always "Lesson xx–xx" (1–5 ... 26–30)
+// If completedChapters == 6, still display last range 26–30.
+function getLessonRange(completedChapters) {
+  const chapterIndex = Math.min(
+    Math.max(completedChapters, 0),
+    TOTAL_CHAPTERS - 1
+  );
+
+  const start = chapterIndex * LESSONS_PER_CHAPTER + 1;
+  const end = start + LESSONS_PER_CHAPTER - 1;
+  return { start, end };
+}
+
+function clampChapters(n) {
+  if (typeof n !== "number" || Number.isNaN(n)) return 0;
+  return Math.min(Math.max(n, 0), TOTAL_CHAPTERS);
+}
+
+function renderSegments(completedChapters) {
+  const done = clampChapters(completedChapters);
+  let html = "";
+  for (let i = 1; i <= TOTAL_CHAPTERS; i++) {
+    html += `<span class="seg ${i <= done ? "on" : ""}" aria-hidden="true"></span>`;
+  }
+  return html;
+}
+
+function render() {
   feed.innerHTML = "";
 
   games.forEach((g, i) => {
-    const card = document.createElement("article");
-    card.className = `card ${i % 2 === 0 ? "left" : "right"}`;
-
     const hasProgress = typeof g.progress === "number";
+    const completedChapters = clampChapters(hasProgress ? g.progress : 0);
+    const range = getLessonRange(completedChapters);
+
+    const card = document.createElement("article");
+    card.className = "card";
 
     card.innerHTML = `
       <div class="row">
         <div class="icon" aria-hidden="true">
           <svg viewBox="0 0 22 22">${iconSVG(i)}</svg>
         </div>
+
         <div class="meta">
           <h2 class="game-title">${g.title}</h2>
           <p class="desc">${g.desc}</p>
+
           <ul class="chips" aria-label="game tags">
             ${g.tags.map(t => `<li class="chip">${t}</li>`).join("")}
           </ul>
+
           <div class="progress-wrap">
-            <div class="progress" style="${hasProgress ? "" : "display:none"}" aria-label="progress">
+            <div class="progress" style="${hasProgress ? "" : "display:none"}" aria-label="lesson progress">
               <div class="progress-label">
-                <span>Progress</span>
-                <span>${hasProgress ? g.progress : 0}%</span>
+                <span>Lesson ${range.start}–${range.end}</span>
+                <span>${completedChapters}/${TOTAL_CHAPTERS}</span>
               </div>
-              <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${hasProgress ? g.progress : 0}">
-                <i style="width:${hasProgress ? g.progress : 0}%"></i>
+
+              <div class="segbar"
+                   role="progressbar"
+                   aria-valuemin="0"
+                   aria-valuemax="${TOTAL_CHAPTERS}"
+                   aria-valuenow="${completedChapters}"
+                   aria-label="Chapters completed">
+                ${renderSegments(completedChapters)}
               </div>
             </div>
+
             <button class="btn ${hasProgress ? "" : "secondary"}" type="button">
               ▶ ${hasProgress ? "Continue" : "Start"}
             </button>

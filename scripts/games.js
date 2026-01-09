@@ -4,7 +4,7 @@ const games = [
     title: "Word Splash",
     desc: "Fast-paced vocabulary matching to build word intuition.",
     tags: ["Vocabulary", "Speed", "Beginner"],
-    progress: 62,
+    progress: 4,
     url: "https://yitongoe.itch.io/word-splash"
   },
   {
@@ -12,7 +12,7 @@ const games = [
     title: "Sentence Builder",
     desc: "Arrange words into correct sentences to practice grammar.",
     tags: ["Grammar", "Logic"],
-    progress: 35,
+    progress: 2,
     url: "https://yitongoe.itch.io/oesb"
   },
   {
@@ -20,7 +20,7 @@ const games = [
     title: "Bubble Pop",
     desc: "Catch the bubble with target words",
     tags: ["Vocabulary", "Speed", "Beginner"],
-    progress: null,
+    progress: 0,
     url: "#"
   },
   {
@@ -44,7 +44,31 @@ const games = [
     title: "Placeholder 3",
     desc: "This is a placeholder card",
     tags: ["Listening"],
-    progress: 3,
+    progress: 6,
     url: "#"
-  }
+  },
+  {
+    id: "placeholder-4",
+    title: "Placeholder 4",
+    desc: "This is a placeholder card",
+    tags: ["Listening"],
+    progress: 6,
+    url: "#"
+  },
+  {
+    id: "placeholder-5",
+    title: "Placeholder 5",
+    desc: "This is a placeholder card",
+    tags: ["Listening"],
+    progress: 6,
+    url: "#"
+  },
+  {
+    id: "placeholder-6",
+    title: "Placeholder 6",
+    desc: "This is a placeholder card",
+    tags: ["Listening"],
+    progress: 6,
+    url: "#"
+  },
 ];

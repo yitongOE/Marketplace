@@ -211,3 +211,21 @@ header{
 .footer-space{
   height:18px;
 }
+
+/* ===== Segmented progress (6 steps) ===== */
+.segbar{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  align-items: center;
+}
+
+.seg{
+  height: 8px;
+  border-radius: 999px;
+  background: var(--track);
+}
+
+.seg.on{
+  background: linear-gradient(90deg, var(--accent), rgba(107,92,255,.55));
+}

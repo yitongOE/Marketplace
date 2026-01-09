@@ -29,6 +29,7 @@ body{
       rgba(255,255,255,.25) 55%,
       rgba(255,255,255,0) 70%),
     linear-gradient(180deg,var(--bg1),var(--bg2));
+  background-attachment: fixed;
   overflow-x:hidden;
 }
 

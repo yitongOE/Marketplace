@@ -5,7 +5,7 @@ const games = [
     desc: "Fast-paced vocabulary matching to build word intuition.",
     tags: ["Vocabulary", "Speed", "Beginner"],
     progress: 62,
-    url: "#"
+    url: "https://yitongoe.itch.io/word-splash"
   },
   {
     id: "sentence-builder",
@@ -13,7 +13,7 @@ const games = [
     desc: "Arrange words into correct sentences to practice grammar.",
     tags: ["Grammar", "Logic"],
     progress: 35,
-    url: "#"
+    url: "https://yitongoe.itch.io/oesb"
   },
   {
     id: "bubble-pop",

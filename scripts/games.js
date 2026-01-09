@@ -21,7 +21,7 @@ const games = [
     desc: "Catch the bubble with target words",
     tags: ["Vocabulary", "Speed", "Beginner"],
     userdata_progress: 0,
-    url: "#"
+    url: "https://whitneyoe.itch.io/bubble-pop"
   },
   {
     id: "placeholder-1",
@@ -71,4 +71,37 @@ const games = [
     userdata_progress: 6,
     url: "#"
   },
+  {
+    id: "placeholder-7",
+    title: "Placeholder 7",
+    desc: "This is a placeholder card",
+    tags: ["Listening"],
+    userdata_progress: 0,
+    url: "#"
+  },
+  {
+    id: "placeholder-8",
+    title: "Placeholder 8",
+    desc: "This is a placeholder card",
+    tags: ["Listening"],
+    userdata_progress: 1,
+    url: "#"
+  },
+  {
+    id: "placeholder-9",
+    title: "Placeholder 9",
+    desc: "This is a placeholder card",
+    tags: ["Listening"],
+    userdata_progress: 2,
+    url: "#"
+  },
+  {
+    id: "placeholder-10",
+    title: "Placeholder 10",
+    desc: "This is a placeholder card",
+    tags: ["Listening"],
+    userdata_progress: 10,
+    url: "#"
+  },
+
 ];

@@ -208,6 +208,15 @@ header{
   color:rgba(15,18,34,.85);
 }
 
+.btn.review{
+  background: linear-gradient(
+    135deg,
+    rgba(107,92,255,.15),
+    rgba(107,92,255,.05)
+  );
+  color: var(--accent);
+}
+
 .footer-space{
   height:18px;
 }

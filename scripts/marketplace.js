@@ -12,6 +12,27 @@ function iconSVG(index) {
   return shapes[index % shapes.length];
 }
 
+function getButtonState(completedChapters) {
+  if (completedChapters <= 0) {
+    return {
+      label: "Start",
+      className: "secondary"
+    };
+  }
+
+  if (completedChapters >= TOTAL_CHAPTERS) {
+    return {
+      label: "Review",
+      className: "review"
+    };
+  }
+
+  return {
+    label: "Continue",
+    className: ""
+  };
+}
+
 // progress = completed chapters (0..6)
 // Display always "Lesson xx–xx" (1–5 ... 26–30)
 // If completedChapters == 6, still display last range 26–30.
@@ -47,6 +68,7 @@ function render() {
     const hasProgress = typeof g.progress === "number";
     const completedChapters = clampChapters(hasProgress ? g.progress : 0);
     const range = getLessonRange(completedChapters);
+    const buttonState = getButtonState(completedChapters);
 
     const card = document.createElement("article");
     card.className = "card";
@@ -82,8 +104,8 @@ function render() {
               </div>
             </div>
 
-            <button class="btn ${hasProgress ? "" : "secondary"}" type="button">
-              ▶ ${hasProgress ? "Continue" : "Start"}
+            <button class="btn ${buttonState.className}" type="button">
+              ▶ ${buttonState.label}
             </button>
           </div>
         </div>

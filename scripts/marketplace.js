@@ -81,9 +81,9 @@ document.addEventListener("DOMContentLoaded", () => {
     leftCol.innerHTML = "";
     rightCol.innerHTML = "";
 
-    games.forEach((g, i) => {
-      const hasProgress = typeof g.userdata_progress === "number";
-      const completedChapters = clampChapters(hasProgress ? g.userdata_progress : 0);
+    games.forEach((game, i) => {
+      const hasProgress = typeof game.userdata_progress === "number";
+      const completedChapters = clampChapters(hasProgress ? game.userdata_progress : 0);
       const range = getLessonRange(completedChapters);
       const buttonState = getButtonState(completedChapters);
 
@@ -97,12 +97,8 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
 
           <div class="meta">
-            <h2 class="game-title">${g.title}</h2>
-            <p class="desc">${g.desc}</p>
-
-            <ul class="chips" aria-label="game tags">
-              ${g.tags.map(t => `<li class="chip">${t}</li>`).join("")}
-            </ul>
+            <h2 class="game-title">${game.title}</h2>
+            <p class="desc">${game.desc}</p>
 
             <div class="progress-wrap">
               <div class="progress" style="${hasProgress ? "" : "display:none"}" aria-label="lesson progress">
@@ -128,12 +124,16 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
       `;
+      // Add this into div meta if we want tags
+      // <ul class="chips" aria-label="game tags">
+        // ${game.tags.map(t => `<li class="chip">${t}</li>`).join("")}
+      // </ul>
 
       // Click on button to open game url
       const button = card.querySelector("button.btn");
       button.addEventListener("click", (e) => {
         e.stopPropagation();
-        window.location.href = g.url;
+        window.location.href = game.url;
       });
 
       // Assign this card to left or right column

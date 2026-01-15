@@ -2,20 +2,20 @@ const games = [
   {
     id: "word-splash",
     title: "Word Splash",
-    desc: "Fast-paced vocabulary matching to build word intuition.",
+    desc: "Pick the correct falling word",
     tags: ["Vocabulary", "Speed", "Beginner"],
     userdata_progress: 4,
     url: "https://yitongoe.itch.io/word-splash",
     logo: "UI/game_logo/temp_wordsplash_logo.png"
   },
   {
-    id: "sentence-builder",
-    title: "Sentence Builder",
-    desc: "Arrange words into correct sentences to practice grammar.",
+    id: "sentence-scramble",
+    title: "Sentence Scramble",
+    desc: "Arrange words into correct sentences",
     tags: ["Grammar", "Logic"],
     userdata_progress: 2,
     url: "https://yitongoe.itch.io/oesb",
-    logo: "UI/game_logo/temp_sentencebuilder_logo.png"
+    logo: "UI/game_logo/temp_sentencescramble_logo.png"
   },
   {
     id: "bubble-pop",

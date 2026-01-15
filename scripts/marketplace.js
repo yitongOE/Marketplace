@@ -1,6 +1,9 @@
+// ====== Variables ======
 const TOTAL_CHAPTERS = 6;
 const LESSONS_PER_CHAPTER = 5;
 
+//#region ====== Draw Game Card Elements ======
+// Generate shape icon if no game logo
 function iconSVG(index) {
   const shapes = [
     `<circle cx="11" cy="11" r="7" fill="rgba(107,92,255,.25)" />`,
@@ -10,22 +13,43 @@ function iconSVG(index) {
   return shapes[index % shapes.length];
 }
 
+// Display game logo
+function renderLogo(game, index) {
+  if (game.logo) {
+    return `
+      <img
+        src="${game.logo}"
+        alt="${game.title} logo"
+        class="game-logo"
+        draggable="false"
+      />
+    `;
+  }
+
+  return `
+    <svg viewBox="0 0 22 22" aria-hidden="true">
+      ${iconSVG(index)}
+    </svg>
+  `;
+}
+
+// Update button look according to learning progress
 function getButtonState(completedChapters) {
-  if (completedChapters <= 0) {
+  if (completedChapters <= 0) { // if haven't started
     return {
       label: "Start",
       className: "secondary"
     };
   }
 
-  if (completedChapters >= TOTAL_CHAPTERS) {
+  if (completedChapters >= TOTAL_CHAPTERS) { // if finished all
     return {
       label: "Review",
       className: "review"
     };
   }
 
-  return {
+  return { // if in middle of progress
     label: "Continue",
     className: ""
   };
@@ -45,11 +69,13 @@ function getLessonRange(completedChapters) {
   return { start, end };
 }
 
+// Make sure the number of completed chapters is legal
 function clampChapters(n) {
   if (typeof n !== "number" || Number.isNaN(n)) return 0;
   return Math.min(Math.max(n, 0), TOTAL_CHAPTERS);
 }
 
+// Generate segments in progress bar according to the number of completed chapters
 function renderSegments(completedChapters) {
   const done = clampChapters(completedChapters);
   let html = "";
@@ -59,6 +85,9 @@ function renderSegments(completedChapters) {
   return html;
 }
 
+//#endregion
+
+// Draw All Game Cards
 document.addEventListener("DOMContentLoaded", () => {
   const leftCol = document.getElementById("col-left");
   const rightCol = document.getElementById("col-right");
@@ -72,9 +101,9 @@ document.addEventListener("DOMContentLoaded", () => {
     leftCol.innerHTML = "";
     rightCol.innerHTML = "";
 
-    games.forEach((g, i) => {
-      const hasProgress = typeof g.userdata_progress === "number";
-      const completedChapters = clampChapters(hasProgress ? g.userdata_progress : 0);
+    games.forEach((game, index) => {
+      const hasProgress = typeof game.userdata_progress === "number";
+      const completedChapters = clampChapters(hasProgress ? game.userdata_progress : 0);
       const range = getLessonRange(completedChapters);
       const buttonState = getButtonState(completedChapters);
 
@@ -84,16 +113,12 @@ document.addEventListener("DOMContentLoaded", () => {
       card.innerHTML = `
         <div class="row">
           <div class="icon" aria-hidden="true">
-            <svg viewBox="0 0 22 22">${iconSVG(i)}</svg>
+            ${renderLogo(game, index)}
           </div>
 
           <div class="meta">
-            <h2 class="game-title">${g.title}</h2>
-            <p class="desc">${g.desc}</p>
-
-            <ul class="chips" aria-label="game tags">
-              ${g.tags.map(t => `<li class="chip">${t}</li>`).join("")}
-            </ul>
+            <h2 class="game-title">${game.title}</h2>
+            <p class="desc">${game.desc}</p>
 
             <div class="progress-wrap">
               <div class="progress" style="${hasProgress ? "" : "display:none"}" aria-label="lesson progress">
@@ -119,12 +144,20 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
       `;
+      // Add this into div meta if we want tags
+      // <ul class="chips" aria-label="game tags">
+        // ${game.tags.map(t => `<li class="chip">${t}</li>`).join("")}
+      // </ul>
 
-      card.onclick = () => {
-        window.location.href = g.url;
-      };
+      // Click on button to open game url
+      const button = card.querySelector("button.btn");
+      button.addEventListener("click", (e) => {
+        e.stopPropagation();
+        window.location.href = game.url;
+      });
 
-      if (i % 2 === 0) leftCol.appendChild(card);
+      // Assign this card to left or right column
+      if (index % 2 === 0) leftCol.appendChild(card);
       else rightCol.appendChild(card);
     });
   }

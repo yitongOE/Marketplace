@@ -5,7 +5,8 @@ const games = [
     desc: "Fast-paced vocabulary matching to build word intuition.",
     tags: ["Vocabulary", "Speed", "Beginner"],
     userdata_progress: 4,
-    url: "https://yitongoe.itch.io/word-splash"
+    url: "https://yitongoe.itch.io/word-splash",
+    logo: "UI/game_logo/temp_wordsplash_logo.png"
   },
   {
     id: "sentence-builder",
@@ -13,7 +14,8 @@ const games = [
     desc: "Arrange words into correct sentences to practice grammar.",
     tags: ["Grammar", "Logic"],
     userdata_progress: 2,
-    url: "https://yitongoe.itch.io/oesb"
+    url: "https://yitongoe.itch.io/oesb",
+    logo: "UI/game_logo/temp_sentencebuilder_logo.png"
   },
   {
     id: "bubble-pop",
@@ -21,7 +23,8 @@ const games = [
     desc: "Catch the bubble with target words",
     tags: ["Vocabulary", "Speed", "Beginner"],
     userdata_progress: 0,
-    url: "https://whitneyoe.itch.io/bubble-pop"
+    url: "https://whitneyoe.itch.io/bubble-pop",
+    logo: "UI/game_logo/temp_bubblepop_logo.png"
   },
   {
     id: "placeholder-1",
@@ -29,7 +32,8 @@ const games = [
     desc: "This is a placeholder card",
     tags: ["Listening"],
     userdata_progress: 1,
-    url: "#"
+    url: "#",
+    logo: null
   },
   {
     id: "placeholder-2",
@@ -37,7 +41,8 @@ const games = [
     desc: "This is a placeholder card",
     tags: ["Listening"],
     userdata_progress: 2,
-    url: "#"
+    url: "#",
+    logo: null
   },
   {
     id: "placeholder-3",
@@ -45,7 +50,8 @@ const games = [
     desc: "This is a placeholder card",
     tags: ["Listening"],
     userdata_progress: 6,
-    url: "#"
+    url: "#",
+    logo: null
   },
   {
     id: "placeholder-4",
@@ -53,7 +59,8 @@ const games = [
     desc: "This is a placeholder card",
     tags: ["Listening"],
     userdata_progress: 6,
-    url: "#"
+    url: "#",
+    logo: null
   },
   {
     id: "placeholder-5",
@@ -61,7 +68,8 @@ const games = [
     desc: "This is a placeholder card",
     tags: ["Listening"],
     userdata_progress: 6,
-    url: "#"
+    url: "#",
+    logo: null
   },
   {
     id: "placeholder-6",
@@ -69,7 +77,8 @@ const games = [
     desc: "This is a placeholder card",
     tags: ["Listening"],
     userdata_progress: 6,
-    url: "#"
+    url: "#",
+    logo: null
   },
   {
     id: "placeholder-7",
@@ -77,7 +86,8 @@ const games = [
     desc: "This is a placeholder card",
     tags: ["Listening"],
     userdata_progress: 0,
-    url: "#"
+    url: "#",
+    logo: null
   },
   {
     id: "placeholder-8",
@@ -85,7 +95,8 @@ const games = [
     desc: "This is a placeholder card",
     tags: ["Listening"],
     userdata_progress: 1,
-    url: "#"
+    url: "#",
+    logo: null
   },
   {
     id: "placeholder-9",
@@ -93,7 +104,8 @@ const games = [
     desc: "This is a placeholder card",
     tags: ["Listening"],
     userdata_progress: 2,
-    url: "#"
+    url: "#",
+    logo: null
   },
   {
     id: "placeholder-10",
@@ -101,7 +113,8 @@ const games = [
     desc: "This is a placeholder card",
     tags: ["Listening"],
     userdata_progress: 10,
-    url: "#"
+    url: "#",
+    logo: null
   },
 
 ];

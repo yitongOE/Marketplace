@@ -87,9 +87,10 @@ header{
   margin-top: 40px; /* Make right column lower than left column */
 }
 
+/* ====== Card Elements ====== */
 .card{
   width: 100%;
-  min-height: 180px;
+  height: 240px;
   background: var(--card);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -99,6 +100,8 @@ header{
 
   display: flex;
   flex-direction: column;
+
+  pointer-events: none;
 }
 
 .card::before{
@@ -116,10 +119,11 @@ header{
 
 .row{
   display:flex;
+  flex-direction: column;
+  align-items: center;
   gap:12px;
 }
 
-/* ====== Card Elements ====== */
 .icon{
   width:44px;
   height:44px;
@@ -131,6 +135,7 @@ header{
   display:grid;
   place-items:center;
   flex-shrink:0;
+  margin: 0 auto;
 }
 
 .icon svg{
@@ -138,10 +143,20 @@ header{
   height:22px;
 }
 
+.game-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
 .meta{
   flex:1;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  text-align: left;
 }
 
 .game-title{
@@ -215,6 +230,8 @@ header{
   background:linear-gradient(180deg,var(--accent),rgba(107,92,255,.8));
   color:white;
   cursor:pointer;
+
+  pointer-events: auto;
 }
 
 .btn.secondary{

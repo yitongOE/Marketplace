@@ -123,6 +123,10 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = game.url;
       };
 
+      // Add enter animation with stagger delay
+      card.classList.add("pop");
+      card.style.animationDelay = `${120 + index * 60}ms`;
+
       // Assign this card to left or right column
       if (index % 2 === 0) leftCol.appendChild(card);
       else rightCol.appendChild(card);

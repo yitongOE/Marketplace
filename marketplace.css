@@ -1,3 +1,4 @@
+/*#region ====== General ====== */
 :root{
   --bg1:#f2efff;
   --bg2:#8b7cff;
@@ -66,12 +67,30 @@ header{
   font-size:13.5px;
   color:rgba(15,18,34,.65);
 }
+/*#endregion*/
 
-/* ====== Cards Layout ====== */
+/*#region ====== Cards Layout ====== */
+@keyframes feedRiseIn {
+  from {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .feed {
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 10px;
+
+  transform: translateY(100vh);
+  opacity: 0;
+
+  animation: feedRiseIn 850ms cubic-bezier(.22,.61,.36,1) both;
+  will-change: transform, opacity;
 }
 
 #col-left {
@@ -86,8 +105,20 @@ header{
   gap: 10px;
   margin-top: 40px; /* Make right column lower than left column */
 }
+/*#endregion*/
 
-/* ====== Card Elements ====== */
+/*#region ====== Card Elements ====== */
+@keyframes cardPopIn {
+  from {
+    transform: translateY(12px) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
 .card{
   width: 100%;
   height: 250px;
@@ -113,6 +144,19 @@ header{
     rgba(107,92,255,.22),
     rgba(107,92,255,0) 70%);
   transform:rotate(18deg);
+}
+
+.card.pop .seg.on {
+  animation: progressReveal 1000ms cubic-bezier(.3,1.2,.3,1) both;
+  will-change: transform, opacity;
+  animation-delay: 600ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feed,
+  .card.pop {
+    animation: none;
+  }
 }
 
 .row{
@@ -169,6 +213,17 @@ header{
   font-size:12.8px;
   color:rgba(15,18,34,.7);
 }
+/*#endregion*/
+
+/*#region ===== Segmented progress (6 steps) ===== */
+@keyframes progressReveal {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
 
 .progress-wrap{
   display: flex;
@@ -205,7 +260,6 @@ header{
   transition:width .4s ease;
 }
 
-/* ===== Segmented progress (6 steps) ===== */
 .segbar{
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -221,4 +275,7 @@ header{
 
 .seg.on{
   background: linear-gradient(90deg, var(--accent), rgba(107,92,255,.55));
+  transform-origin: left center;
+  transform: scaleX(0);
 }
+/*#endregion*/

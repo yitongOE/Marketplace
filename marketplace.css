@@ -279,3 +279,31 @@ header{
   transform: scaleX(0);
 }
 /*#endregion*/
+
+/*#region ====== DEVELOPER MODE ====== */
+
+.warning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+
+  background: linear-gradient(
+    45deg,
+    #ffcc00,
+    #ffcc00 12px,
+    #111 12px,
+    #111 24px
+  );
+  color: white;
+}
+
+/*#endregion */

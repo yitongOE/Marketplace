@@ -1,6 +1,4 @@
-/* ======================================================
-   Root / Variables
-   ====================================================== */
+/*#region ====== General ====== */
 
 :root{
   --bg1:#f2efff;
@@ -28,7 +26,7 @@ html,
 body{
   margin:0;
   padding:0;
-  min-height:100%;
+  min-height:100vh;
   overflow-x:hidden;
 
   font-family: system-ui, -apple-system, Segoe UI, Roboto,
@@ -36,12 +34,8 @@ body{
   color:var(--text);
 
   -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
 }
-
-
-/* ======================================================
-   Background  (ONLY here, Safari-safe)
-   ====================================================== */
 
 body{
   background:
@@ -54,15 +48,13 @@ body{
     linear-gradient(180deg,var(--bg1),var(--bg2));
 }
 
-/* 旧 bg 层直接失效化，防止 iOS Safari fixed bug */
 .bg{
   display:none;
 }
 
+/*#endregion */
 
-/* ======================================================
-   Developer Warning Banner
-   ====================================================== */
+/*#region ====== Developer Warning Banner ====== */
 
 .warning{
   position:fixed;
@@ -89,10 +81,9 @@ body{
   color:white;
 }
 
+/*#endregion */
 
-/* ======================================================
-   App Layout
-   ====================================================== */
+/*#region ====== App Layout ====== */
 
 .app{
   max-width:520px;
@@ -102,6 +93,7 @@ body{
     calc(18px + var(--safe-top) + 28px)  /* + warning height */
     16px
     calc(18px + var(--safe-bottom));
+  padding-bottom: calc(40px + var(--safe-bottom));
 }
 
 header{
@@ -121,10 +113,9 @@ header{
   color:rgba(15,18,34,.65);
 }
 
+/*#endregion */
 
-/* ======================================================
-   Feed Entrance Animation (Safari SAFE)
-   ====================================================== */
+/*#region ====== Feed ====== */
 
 @keyframes feedRiseIn {
   from{
@@ -160,10 +151,9 @@ header{
   margin-top:40px;
 }
 
+/*#endregion */
 
-/* ======================================================
-   Card
-   ====================================================== */
+/*#region ====== Card ====== */
 
 @keyframes cardPopIn {
   from{
@@ -211,10 +201,9 @@ header{
   animation:cardPopIn 420ms cubic-bezier(.22,.61,.36,1) both;
 }
 
+/*#endregion */
 
-/* ======================================================
-   Card Content
-   ====================================================== */
+/*#region ====== Card Content ====== */
 
 .row{
   display:flex;
@@ -270,10 +259,9 @@ header{
   color:rgba(15,18,34,.7);
 }
 
+/*#endregion */
 
-/* ======================================================
-   Progress
-   ====================================================== */
+/*#region ====== Progress Bar ====== */
 
 .progress-wrap{
   margin-top:auto;
@@ -314,11 +302,6 @@ header{
   transform:scaleX(0);
 }
 
-
-/* ======================================================
-   Progress Animation (delayed, slow, Safari-safe)
-   ====================================================== */
-
 @keyframes progressReveal {
   from{ transform:scaleX(0); }
   to{ transform:scaleX(1); }
@@ -329,10 +312,9 @@ header{
   animation-delay:700ms;
 }
 
+/*#endregion */
 
-/* ======================================================
-   Reduced Motion
-   ====================================================== */
+/*#region ====== Reduced Motion ====== */
 
 @media (prefers-reduced-motion: reduce){
   .feed,
@@ -343,3 +325,5 @@ header{
     opacity:1;
   }
 }
+
+/*#endregion */

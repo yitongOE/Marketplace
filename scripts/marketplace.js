@@ -1,3 +1,8 @@
+// DOM References
+const leftCol = document.getElementById("col-left");
+const rightCol = document.getElementById("col-right");
+const searchInput = document.getElementById("game-search");
+
 // ====== Variables ======
 const TOTAL_CHAPTERS = 6;
 const LESSONS_PER_CHAPTER = 5;
@@ -67,19 +72,22 @@ function renderSegments(completedChapters) {
 
 // Draw All Game Cards
 document.addEventListener("DOMContentLoaded", () => {
-  const leftCol = document.getElementById("col-left");
-  const rightCol = document.getElementById("col-right");
-
   if (!leftCol || !rightCol) {
     console.error("Missing #col-left or #col-right in index.html");
     return;
   }
   
-  function render() {
+  function render(filterText = "") {
     leftCol.innerHTML = "";
     rightCol.innerHTML = "";
 
-    games.forEach((game, index) => {
+    // Remove unmatched games
+    const filteredGames = games.filter(game => 
+      game.title.toLowerCase().includes(filterText.toLowerCase()) ||
+      game.desc.toLowerCase().includes(filterText.toLowerCase())
+    );
+
+    filteredGames.forEach((game, index) => {
       const hasProgress = typeof game.userdata_progress === "number";
       const completedChapters = clampChapters(hasProgress ? game.userdata_progress : 0);
       const range = getLessonRange(completedChapters);
@@ -133,6 +141,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Search bar user input
+  searchInput.addEventListener("input", (e) => {
+    render(e.target.value);
+  });
+
   render();
 });
-

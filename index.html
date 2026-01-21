@@ -6,7 +6,7 @@
   
   <title>Marketplace</title>
   
-  <!-- Styles -->
+  <!-- ====== Styles ====== -->
   <link rel="stylesheet" href="marketplace.css" />
 </head>
 
@@ -19,38 +19,46 @@
   <!-- Background -->
   <div class="bg"></div>
 
-  <!-- Main Menu -->
+  <!-- ====== Main Menu ====== -->
   <main class="app">
     <header>
       <h1 class="title">Marketplace</h1>
       <p class="subtitle">Scroll down to explore all mini-games. Tap a card to start or continue.</p>
     </header>
 
-    <!-- Search Bar -->
+    <!-- ====== Search Bar ====== -->
     <div class="search-container">
-    <div class="search-box">
-      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
-      <input type="text" id="game-search" placeholder="Search games..." autocomplete="off">
-      <div id="search-clear" class="search-clear" aria-label="Clear search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
+      <div class="search-box">
+        <!-- Magnifyglass Icon -->
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        
+        <!-- User Input -->
+        <input type="text" id="game-search" placeholder="Search games..." autocomplete="off">
+        
+        <!-- Clear Button -->
+        <div id="search-clear" class="search-clear" aria-label="Clear search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </div>
+      </div>
     </div>
-    </div>
-  </div>
 
-    <!-- Card Zone -->
+    <!-- No Matching Results to Search -->
+    <div id="no-results" class="no-results" style="display: none;"></div>
+
+    <!-- ====== Card Zone ====== -->
     <div class="feed">
       <div id="col-left"></div>
       <div id="col-right"></div>
     </div>
   </main>
 
-  <!-- Scripts -->
+  <!-- ====== Scripts ====== -->
   <script src="scripts/games.js"></script>
   <script src="scripts/marketplace.js"></script>
 </body>

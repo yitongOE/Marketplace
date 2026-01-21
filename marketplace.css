@@ -193,6 +193,22 @@ header{
   display: flex;
 }
 
+.no-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.no-results span {
+  display: block;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 4px;
+  word-break: break-all;
+}
+
 /*#endregion */
 
 /*#region ====== Feed ====== */

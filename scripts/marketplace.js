@@ -3,6 +3,8 @@ const leftCol = document.getElementById("col-left");
 const rightCol = document.getElementById("col-right");
 const searchInput = document.getElementById("game-search");
 const clearBtn = document.getElementById("search-clear");
+const noResults = document.getElementById("no-results");
+const feed = document.querySelector(".feed");
 
 // ====== Variables ======
 const TOTAL_CHAPTERS = 6;
@@ -94,6 +96,16 @@ document.addEventListener("DOMContentLoaded", () => {
       game.title.toLowerCase().includes(filterText.toLowerCase()) ||
       game.desc.toLowerCase().includes(filterText.toLowerCase())
     );
+
+    // Display No Matching Result text if so
+    if (filteredGames.length === 0) {
+      feed.style.display = "none";
+      noResults.style.display = "block";
+      noResults.innerHTML = `No matching results for <span>"${filterText}"</span>`;
+    } else {
+      feed.style.display = "grid"; // Display matched results
+      noResults.style.display = "none";
+    }
 
     filteredGames.forEach((game, index) => {
       const hasProgress = typeof game.userdata_progress === "number";

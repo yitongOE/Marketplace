@@ -11,6 +11,7 @@ const TOTAL_CHAPTERS = 6;
 const LESSONS_PER_CHAPTER = 5;
 
 //#region ====== Draw Game Card Elements ======
+
 // Generate shape icon if no game logo
 function iconSVG(index) {
   const shapes = [
@@ -69,6 +70,39 @@ function renderSegments(completedChapters) {
     html += `<span class="seg ${i <= done ? "on" : ""}" aria-hidden="true"></span>`;
   }
   return html;
+}
+
+//#endregion
+
+//#region ====== Rank ======
+
+function ordinal(n) {
+  const s = ["th", "st", "nd", "rd"];
+  const v = n % 100;
+  return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+
+function trophySVG() {
+  return `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M8 4h8v3c0 2.8-1.6 5-4 5s-4-2.2-4-5V4Z" fill="#D4AF37"/>
+      <path d="M6 5H4c0 4 2 6 5 6V9C7.1 9 6 7.6 6 5Z" fill="#D4AF37"/>
+      <path d="M18 5h2c0 4-2 6-5 6V9c1.9 0 3-1.4 3-4Z" fill="#D4AF37"/>
+      <path d="M10 12h4v3a3 3 0 0 1-4 0v-3Z" fill="#C89B2C"/>
+      <path d="M9 18h6v2H9v-2Z" fill="#D4AF37"/>
+      <path d="M8 20h8v2H8v-2Z" fill="#B8891D"/>
+    </svg>
+  `;
+}
+
+function createRankBadge(rank) {
+  const el = document.createElement("div");
+  el.className = "rank-badge";
+  el.innerHTML = `
+    <span class="rank-trophy">${trophySVG()}</span>
+    <span class="rank-text">${ordinal(rank)}</span>
+  `;
+  return el;
 }
 
 //#endregion
@@ -145,6 +179,14 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
       `;
+
+      if (Number.isFinite(game.rank)) {
+        const meta = card.querySelector(".meta");
+        const progressWrap = meta.querySelector(".progress-wrap");
+        const rankBadge = createRankBadge(game.rank);
+
+        meta.insertBefore(rankBadge, progressWrap);
+      }
 
       // Click on card to open game url
       card.onclick = () => {

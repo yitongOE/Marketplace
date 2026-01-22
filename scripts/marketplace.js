@@ -188,8 +188,9 @@ document.addEventListener("DOMContentLoaded", () => {
         meta.insertBefore(rankBadge, progressWrap);
       }
 
-      // Click on card to open game url
-      card.onclick = () => {
+      // Click on icon to open game url
+      const icon = card.querySelector(".icon");
+      icon.onclick = () => {
         window.location.href = game.url;
       };
 

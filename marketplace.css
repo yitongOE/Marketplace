@@ -378,6 +378,8 @@ header{
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.04em;
+
+  cursor: pointer;
 }
 
 .rank-trophy svg{
@@ -450,6 +452,83 @@ header{
     transform:none;
     opacity:1;
   }
+}
+
+/*#endregion */
+
+/*#region ====== Leaderboard ====== */
+
+.overlay{
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+
+  background: rgba(15,18,34,.45);
+  backdrop-filter: blur(6px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay.hidden{
+  display: none;
+}
+
+.overlay-panel{
+  width: 100%;
+  max-width: 420px;
+  height: 80vh;
+
+  background: var(--card);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.overlay-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+.overlay-close{
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.overlay-content{
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.overlay-footer{
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+  border-top: 1px solid rgba(0,0,0,.06);
+}
+
+.overlay-btn{
+  flex: 1;
+  height: 44px;
+  border-radius: 12px;
+  border: none;
+  background: #eee;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.overlay-btn.primary{
+  background: var(--accent);
+  color: white;
 }
 
 /*#endregion */

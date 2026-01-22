@@ -1,16 +1,30 @@
-// DOM References
+//#region ====== DOM References ======
+
+// Main
 const leftCol = document.getElementById("col-left");
 const rightCol = document.getElementById("col-right");
+
+// Search bar
 const searchInput = document.getElementById("game-search");
 const clearBtn = document.getElementById("search-clear");
 const noResults = document.getElementById("no-results");
 const feed = document.querySelector(".feed");
 
+// Leaderboard
+const leaderboardOverlay = document.getElementById("leaderboard-overlay");
+const leaderboardTitle = document.getElementById("leaderboard-title");
+const leaderboardContent = document.getElementById("leaderboard-content");
+const leaderboardClose = document.getElementById("leaderboard-close");
+const leaderboardBack = document.getElementById("leaderboard-back");
+const leaderboardSwitch = document.getElementById("leaderboard-switch");
+
+//#endregion
+
 // ====== Variables ======
 const TOTAL_CHAPTERS = 6;
 const LESSONS_PER_CHAPTER = 5;
 
-//#region ====== Draw Game Card Elements ======
+//#region ====== Draw Game Card ======
 
 // Generate shape icon if no game logo
 function iconSVG(index) {
@@ -72,16 +86,14 @@ function renderSegments(completedChapters) {
   return html;
 }
 
-//#endregion
-
-//#region ====== Rank ======
-
+// Format rank text
 function ordinal(n) {
   const s = ["th", "st", "nd", "rd"];
   const v = n % 100;
   return n + (s[(v - 20) % 10] || s[v] || s[0]);
 }
 
+// Draw rank trophy icon
 function trophySVG() {
   return `
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -104,8 +116,6 @@ function createRankBadge(rank) {
   `;
   return el;
 }
-
-//#endregion
 
 // Draw All Game Cards
 document.addEventListener("DOMContentLoaded", () => {
@@ -186,6 +196,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const rankBadge = createRankBadge(game.rank);
 
         meta.insertBefore(rankBadge, progressWrap);
+
+        // Click on rank to open leaderboard
+        rankBadge.addEventListener("click", (e) => {
+          e.stopPropagation();
+          openLeaderboard(game);
+        });
       }
 
       // Click on icon to open game url
@@ -218,3 +234,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
   render();
 });
+
+//#endregion
+
+//#region ====== Leaderboard ======
+
+function openLeaderboard(game){
+  leaderboardTitle.textContent = `${game.title} · Leaderboard`;
+
+  leaderboardContent.innerHTML = `
+    <p>🏆 Your current rank: <strong>${ordinal(game.rank)}</strong></p>
+    <p>(Placeholder leaderboard content)</p>
+  `;
+
+  leaderboardOverlay.classList.remove("hidden");
+  leaderboardOverlay.setAttribute("aria-hidden", "false");
+}
+
+function closeLeaderboard(){
+  leaderboardOverlay.classList.add("hidden");
+  leaderboardOverlay.setAttribute("aria-hidden", "true");
+}
+
+leaderboardClose.onclick = closeLeaderboard;
+leaderboardBack.onclick = closeLeaderboard;
+
+leaderboardSwitch.onclick = () => {
+  closeLeaderboard();
+};
+
+
+//#endregion

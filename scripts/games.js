@@ -6,7 +6,7 @@ const games = [
     userdata_progress: 4,
     url: "https://yitongoe.itch.io/word-splash",
     logo: "UI/game_logo/temp_wordsplash_logo.png",
-    rank: 876
+    userdata_score: 44429
   },
   {
     id: "sentence-scramble",
@@ -15,7 +15,7 @@ const games = [
     userdata_progress: 2,
     url: "https://yitongoe.itch.io/oesb",
     logo: "UI/game_logo/temp_sentencescramble_logo.png",
-    rank: 112
+    userdata_score: 55484
   },
   {
     id: "bubble-pop",
@@ -24,7 +24,7 @@ const games = [
     userdata_progress: 0,
     url: "https://whitneyoe.itch.io/bubble-pop",
     logo: "UI/game_logo/temp_bubblepop_logo.png",
-    rank: 234
+    userdata_score: 61518
   },
   {
     id: "placeholder-1",
@@ -33,7 +33,7 @@ const games = [
     userdata_progress: 1,
     url: "#",
     logo: null,
-    rank: 1
+    userdata_score: 87746
   },
   {
     id: "placeholder-2",
@@ -42,7 +42,7 @@ const games = [
     userdata_progress: 2,
     url: "#",
     logo: null,
-    rank: 1
+    userdata_score: 82745
   },
   {
     id: "placeholder-3",
@@ -51,7 +51,7 @@ const games = [
     userdata_progress: 6,
     url: "#",
     logo: null,
-    rank: 1
+    userdata_score: 93740
   },
   {
     id: "placeholder-4",
@@ -60,7 +60,7 @@ const games = [
     userdata_progress: 6,
     url: "#",
     logo: null,
-    rank: 1
+    userdata_score: 71087
   },
   {
     id: "placeholder-5",
@@ -69,7 +69,7 @@ const games = [
     userdata_progress: 6,
     url: "#",
     logo: null,
-    rank: 1
+    userdata_score: 4156
   },
   {
     id: "placeholder-6",
@@ -78,7 +78,7 @@ const games = [
     userdata_progress: 6,
     url: "#",
     logo: null,
-    rank: 1
+    userdata_score: 58316
   },
   {
     id: "placeholder-7",
@@ -87,7 +87,7 @@ const games = [
     userdata_progress: 0,
     url: "#",
     logo: null,
-    rank: 1
+    userdata_score: 92446
   },
   {
     id: "placeholder-8",
@@ -96,7 +96,7 @@ const games = [
     userdata_progress: 1,
     url: "#",
     logo: null,
-    rank: 1
+    userdata_score: 61047
   },
   {
     id: "placeholder-9",
@@ -105,7 +105,7 @@ const games = [
     userdata_progress: 2,
     url: "#",
     logo: null,
-    rank: 1
+    userdata_score: 65970
   },
   {
     id: "placeholder-10",
@@ -114,7 +114,7 @@ const games = [
     userdata_progress: 10,
     url: "#",
     logo: null,
-    rank: 1
+    userdata_score: 86052
   },
 
 ];

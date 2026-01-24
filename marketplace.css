@@ -55,10 +55,6 @@ body{
   background-attachment: fixed;
 }
 
-.bg{
-  display:none;
-}
-
 /*#endregion */
 
 /*#region ====== Developer Warning Banner ====== */
@@ -497,13 +493,6 @@ header{
   border-bottom: 1px solid rgba(0,0,0,.06);
 }
 
-.overlay-close{
-  border: none;
-  background: transparent;
-  font-size: 20px;
-  cursor: pointer;
-}
-
 .overlay-content{
   flex: 1;
   padding: 16px;
@@ -532,28 +521,25 @@ header{
   color: white;
 }
 
-.lb-top3{
+/* ------ Top 3 ------ */
+.lb-podium{
   display: grid;
   grid-template-columns: 1fr 1.2fr 1fr;
   align-items: end;
   gap: 12px;
   margin-bottom: 24px;
-}
-
-/* ------ Top 3 ------ */
-.lb-top3{
   text-align: center;
   color: var(--text);
 }
 
-.lb-top{
+.lb-podium-item{
   background: rgba(107,92,255,.10);
   border: 1px solid rgba(107,92,255,.18);
   border-radius: 18px;
   padding: 12px 10px;
 }
 
-.lb-top .avatar{
+.lb-podium-item .avatar{
   width: 56px;
   height: 56px;
   border-radius: 999px;
@@ -561,13 +547,13 @@ header{
   background: rgba(107,92,255,.18);
 }
 
-.lb-top .name{
+.lb-podium-item .name{
   font-weight: 800;
   font-size: 13px;
   margin-bottom: 4px;
 }
 
-.lb-top .score{
+.lb-podium-item .score{
   font-weight: 900;
   color: var(--accent);
 }
@@ -631,21 +617,13 @@ header{
 }
 
 /* ------ Behind 10th ------ */
-.lb-item{
-  display: grid;
-  grid-template-columns: 24px 36px 1fr auto;
-  align-items: center;
-
-  padding: 10px 14px;
-  margin-bottom: 8px;
-
+.lb-item-overflow{
   background: rgba(255,255,255,0.12);
-  border-radius: 14px;
+  border: none;
 }
 
-.lb-item .score{
+.lb-item-overflow .score{
   color: var(--accent-yellow);
-  font-weight: 700;
 }
 
 /*#endregion */

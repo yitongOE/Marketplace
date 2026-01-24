@@ -266,21 +266,21 @@ function openLeaderboard(game, rank) {
 
   const data = buildLeaderboard(game);
 
-  const top3 = data.slice(0, 3);
+  const podium = data.slice(0, 3);
   const rest = data.slice(3, 10);
   const player = data.find(p => p.isPlayer);
 
   // ===== Top 3 =====
-  const top3HTML = top3.map((p) => `
-    <div class="lb-top lb-rank-${p.rank}">
+  const podiumHTML = podium.map((p) => `
+    <div class="lb-podium-item lb-rank-${p.rank}">
       <div class="avatar"></div>
       <div class="name">${p.name}</div>
       <div class="score">${p.score}</div>
       ${p.rank === 1 ? `<div class="crown">👑</div>` : ""}
     </div>
   `).join("");
-  
-  document.getElementById("lb-top3").innerHTML = top3HTML;
+
+  document.getElementById("lb-podium").innerHTML = podiumHTML;
 
   // ===== 4–10 =====
   const listHTML = rest.map(p => `
@@ -299,7 +299,7 @@ function openLeaderboard(game, rank) {
 
   if (player && player.rank > 10) {
     overflowHTML.innerHTML = `
-      <div class="lb-item lb-item-player">
+      <div class="lb-item lb-item-player lb-item-overflow">
         <span class="rank">${player.rank}</span>
         <span class="name">${player.name}</span>
         <span class="score">${player.score}</span>

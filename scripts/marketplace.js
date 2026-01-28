@@ -264,6 +264,18 @@ function buildLeaderboard(game) {
   return list.map((p, i) => ({ ...p, rank: i + 1 }));
 }
 
+// Add rank format like 1st, 2nd, 10th
+function formatRank(n){
+  const s = ["th", "st", "nd", "rd"];
+  const v = n % 100;
+  return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+
+// Placeholder: Get avatar for each user from API
+function getAvatarUrl(name){
+  return `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(name)}`;
+}
+
 // Draw entire leaderbaord
 function openLeaderboard(game, rank) {
   lbTitle.textContent = `${game.title} · Leaderboard`;
@@ -274,10 +286,14 @@ function openLeaderboard(game, rank) {
   const podium = data.slice(0, 3);
   const podiumOrdered = [podium[1], podium[0], podium[2]];
   const podiumHTML = podiumOrdered.map((p) => `
-    <div class="lb-podium-item lb-rank-${p.rank}">
-      <div class="podium-rank">${p.rank}</div>
+    <div class="lb-podium-item lb-rank-${p.rank} ${p.isPlayer ? "lb-item-player" : ""}">
+      <div class="podium-rank">${formatRank(p.rank)}</div>
 
-      <div class="avatar"></div>
+      <img
+        class="avatar"
+        src="${getAvatarUrl(p.name)}"
+        alt="${p.name}"
+      />
 
       <div class="name">${p.name}</div>
       <div class="score">${p.score}</div>
@@ -291,8 +307,14 @@ function openLeaderboard(game, rank) {
   // ===== 4–10 =====
   const listHTML = data.slice(3, 10).map(p => `
     <li class="lb-item ${p.isPlayer ? "lb-item-player" : ""}">
-      <span class="rank">${p.rank}</span>
-      <span class="avatar"></span>
+      <span class="rank">${formatRank(p.rank)}</span>
+      
+      <img
+        class="avatar"
+        src="${getAvatarUrl(p.name)}"
+        alt="${p.name}"
+      />
+
       <span class="name">${p.name}</span>
       <span class="score">${p.score}</span>
     </li>
@@ -313,8 +335,14 @@ function openLeaderboard(game, rank) {
     overflowHTML.innerHTML = `
       <ul class="lb-list">
         <li class="lb-item lb-item-player">
-          <span class="rank">${player.rank}</span>
-          <span class="avatar"></span>
+          <span class="rank">${formatRank(player.rank)}</span>
+          
+          <img
+            class="avatar"
+            src="${getAvatarUrl(player.name)}"
+            alt="${player.name}"
+          />
+          
           <span class="name">${player.name}</span>
           <span class="score">${player.score}</span>
         </li>

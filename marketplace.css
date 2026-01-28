@@ -540,6 +540,11 @@ header{
   background: rgba(107,92,255,0.12);
 }
 
+.lb-podium-item.lb-item-player{
+  background: #e6e4ff;
+  border: 2px solid #7a72ff; 
+}
+
 .lb-podium-item .avatar{
   width: 56px;
   height: 56px;
@@ -582,7 +587,7 @@ header{
 }
 
 .podium-rank{
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 900;
   letter-spacing: 0.08em;
   opacity: 0.65;
@@ -603,6 +608,7 @@ header{
 
   padding: 10px 12px;
   margin-bottom: 8px;
+  column-gap: 12px;
 
   background: rgba(15,18,34,0.04);
   border: 1px solid rgba(15,18,34,0.06);

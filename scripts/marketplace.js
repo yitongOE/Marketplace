@@ -22,6 +22,7 @@ const lbSwitchBtn = document.getElementById("leaderboard-switch");
 // ====== Variables ======
 const TOTAL_CHAPTERS = 6;
 const LESSONS_PER_CHAPTER = 5;
+const userdata_username = "username (You)"
 
 //#region ====== Draw Game Card ======
 
@@ -243,12 +244,12 @@ document.addEventListener("DOMContentLoaded", () => {
 // Sort all users scores
 function getSortedScores(game) {
   const base = leaderboardData[game.id].filter(
-    p => p.name !== "You" && !p.isPlayer
+    p => p.name !== userdata_username && !p.isPlayer
   );
 
   return [
     ...base,
-    { name: "You", score: game.userdata_score, isPlayer: true }
+    { name: userdata_username, score: game.userdata_score, isPlayer: true }
   ].sort((a, b) => b.score - a.score);
 }
 

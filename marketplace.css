@@ -521,6 +521,64 @@ header{
   color: white;
 }
 
+/* ------ Current User ------ */
+
+.lb-current-user{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+  
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  
+  background: #f3f2ff;
+  border-radius: 16px;
+}
+
+.lb-current-user .avatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.lb-current-user .info{
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.lb-current-user .name{
+  font-weight: 600;
+}
+
+.lb-current-user .meta{
+  font-size: 14px;
+  color: #666;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.lb-current-user .meta .score,
+.lb-current-user .meta .rank{
+  font-weight: 600;
+  color: #6b5cff;
+}
+
+.you-badge{
+  margin-left: 6px;
+  margin-right: 6px;
+  padding: 2px 6px;
+  font-size: 12px;
+  border-radius: 999px;
+  background: rgba(107,92,255,.15);
+  color: #6b5cff;
+}
+
+
 /* ------ Top 3 ------ */
 .lb-podium{
   display: grid;
@@ -555,8 +613,17 @@ header{
 
 .lb-podium-item .name{
   font-weight: 800;
-  font-size: 13px;
+  font-size: 16px;
   margin-bottom: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lb-podium-item .you-badge {
+  margin: 0;
+  font-size: 12px;
+  padding: 1px 6px;
 }
 
 .lb-podium-item .score{

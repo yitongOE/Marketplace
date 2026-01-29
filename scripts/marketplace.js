@@ -23,7 +23,7 @@ const lbPlayBtn = document.getElementById("lb-play");
 
 const TOTAL_CHAPTERS = 6;
 //const LESSONS_PER_CHAPTER = 5;
-const userdata_username = "username (You)"
+const userdata_username = "username"
 let curGameToOpen = null;
 
 // ====== General Logics ======
@@ -285,12 +285,45 @@ function getAvatarUrl(name){
   return `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(name)}`;
 }
 
+// Add "You" next to current user
+function renderYouBadge(isPlayer){
+  return isPlayer ? `<span class="you-badge">You</span>` : "";
+}
+
 // Draw entire leaderbaord
 function openLeaderboard(game, rank) {
   lbTitle.textContent = `${game.title} · Leaderboard`;
   curGameToOpen = game;
 
   const data = buildLeaderboard(game);
+  
+  // ===== Current User =====
+  const player = data.find(p => p.isPlayer);
+  
+  let currentUserHTML = "";
+  if (player) {
+    currentUserHTML = `
+    <img
+        class="avatar"
+        src="${getAvatarUrl(player.name)}"
+        alt="${player.name}"
+      />
+
+      <div class="info">
+        <div class="name">
+          ${player.name}
+          <span class="you-badge">You</span>
+        </div>
+
+        <div class="meta">
+          Score: <span class="score">${player.score}</span>
+          Rank <span class="rank">${formatRank(player.rank)}</span>
+        </div>
+      </div>
+  `;
+  }
+  
+  document.getElementById("lb-current-user").innerHTML = currentUserHTML;
   
   // ===== Top 3 =====
   const podium = data.slice(0, 3);
@@ -305,7 +338,11 @@ function openLeaderboard(game, rank) {
         alt="${p.name}"
       />
 
-      <div class="name">${p.name}</div>
+      <div class="name">
+        ${p.name}
+        ${renderYouBadge(p.isPlayer)}
+      </div>
+
       <div class="score">${p.score}</div>
 
       ${p.rank === 1 ? `<div class="crown">👑</div>` : ""}
@@ -325,7 +362,11 @@ function openLeaderboard(game, rank) {
         alt="${p.name}"
       />
 
-      <span class="name">${p.name}</span>
+      <span class="name">
+        ${p.name}
+        ${renderYouBadge(p.isPlayer)}
+      </span>
+
       <span class="score">${p.score}</span>
     </li>
   `).join("");
@@ -333,7 +374,6 @@ function openLeaderboard(game, rank) {
   document.getElementById("lb-list").innerHTML = listHTML;
 
   // ===== Player rank > 10 =====
-  const player = data.find(p => p.isPlayer);
   const overflowHTML = document.getElementById("lb-overflow");
   const isPlayerInTop10 = data.slice(0, 10).some(p => p.isPlayer);
 
@@ -353,7 +393,11 @@ function openLeaderboard(game, rank) {
             alt="${player.name}"
           />
           
-          <span class="name">${player.name}</span>
+          <span class="name">
+            ${player.name}
+            <span class="you-badge">You</span>
+          </span>
+          
           <span class="score">${player.score}</span>
         </li>
       </ul>
@@ -376,7 +420,19 @@ function closeLeaderboard(){
 lbCloseBtn.onclick = closeLeaderboard;
 
 lbPlayBtn.onclick = () => {
+  if (!curGameToOpen) return;
   openGameURL(curGameToOpen);
 };
+
+// Tap outside of Leaderboard to close it
+lbOverlay.addEventListener("click", () => {
+  closeLeaderboard();
+});
+
+const lbPanel = document.querySelector(".lb-panel");
+
+lbPanel.addEventListener("click", (e) => {
+  e.stopPropagation();
+});
 
 //#endregion

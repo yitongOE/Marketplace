@@ -23,7 +23,7 @@ const lbPlayBtn = document.getElementById("lb-play");
 
 const TOTAL_CHAPTERS = 6;
 //const LESSONS_PER_CHAPTER = 5;
-const userdata_username = "username (You)"
+const userdata_username = "username"
 let curGameToOpen = null;
 
 // ====== General Logics ======
@@ -292,6 +292,36 @@ function openLeaderboard(game, rank) {
 
   const data = buildLeaderboard(game);
   
+  // ===== Current User =====
+  const player = data.find(p => p.isPlayer);
+  
+  let currentUserHTML = "";
+  if (player) {
+    currentUserHTML = `
+    <div class="lb-current-user">
+      <img
+        class="avatar"
+        src="${getAvatarUrl(player.name)}"
+        alt="${player.name}"
+      />
+
+      <div class="info">
+        <div class="name">
+          ${player.name}
+          <span class="you-badge">You</span>
+        </div>
+
+        <div class="meta">
+          Score: <span class="score">${player.score}</span>
+          · Rank <span class="rank">${formatRank(player.rank)}</span>
+        </div>
+      </div>
+    </div>
+  `;
+  }
+  
+  document.getElementById("lb-current-user").innerHTML = currentUserHTML;
+  
   // ===== Top 3 =====
   const podium = data.slice(0, 3);
   const podiumOrdered = [podium[1], podium[0], podium[2]];
@@ -333,7 +363,6 @@ function openLeaderboard(game, rank) {
   document.getElementById("lb-list").innerHTML = listHTML;
 
   // ===== Player rank > 10 =====
-  const player = data.find(p => p.isPlayer);
   const overflowHTML = document.getElementById("lb-overflow");
   const isPlayerInTop10 = data.slice(0, 10).some(p => p.isPlayer);
 
@@ -376,6 +405,7 @@ function closeLeaderboard(){
 lbCloseBtn.onclick = closeLeaderboard;
 
 lbPlayBtn.onclick = () => {
+  if (!curGameToOpen) return;
   openGameURL(curGameToOpen);
 };
 

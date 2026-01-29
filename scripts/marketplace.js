@@ -285,6 +285,11 @@ function getAvatarUrl(name){
   return `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(name)}`;
 }
 
+// Add "You" next to current user
+function renderYouBadge(isPlayer){
+  return isPlayer ? `<span class="you-badge">You</span>` : "";
+}
+
 // Draw entire leaderbaord
 function openLeaderboard(game, rank) {
   lbTitle.textContent = `${game.title} · Leaderboard`;
@@ -298,8 +303,7 @@ function openLeaderboard(game, rank) {
   let currentUserHTML = "";
   if (player) {
     currentUserHTML = `
-    <div class="lb-current-user">
-      <img
+    <img
         class="avatar"
         src="${getAvatarUrl(player.name)}"
         alt="${player.name}"
@@ -313,10 +317,9 @@ function openLeaderboard(game, rank) {
 
         <div class="meta">
           Score: <span class="score">${player.score}</span>
-          · Rank <span class="rank">${formatRank(player.rank)}</span>
+          Rank <span class="rank">${formatRank(player.rank)}</span>
         </div>
       </div>
-    </div>
   `;
   }
   
@@ -335,7 +338,11 @@ function openLeaderboard(game, rank) {
         alt="${p.name}"
       />
 
-      <div class="name">${p.name}</div>
+      <div class="name">
+        ${p.name}
+        ${renderYouBadge(p.isPlayer)}
+      </div>
+
       <div class="score">${p.score}</div>
 
       ${p.rank === 1 ? `<div class="crown">👑</div>` : ""}
@@ -355,7 +362,11 @@ function openLeaderboard(game, rank) {
         alt="${p.name}"
       />
 
-      <span class="name">${p.name}</span>
+      <span class="name">
+        ${p.name}
+        ${renderYouBadge(p.isPlayer)}
+      </span>
+
       <span class="score">${p.score}</span>
     </li>
   `).join("");
@@ -382,7 +393,11 @@ function openLeaderboard(game, rank) {
             alt="${player.name}"
           />
           
-          <span class="name">${player.name}</span>
+          <span class="name">
+            ${player.name}
+            <span class="you-badge">You</span>
+          </span>
+          
           <span class="score">${player.score}</span>
         </li>
       </ul>

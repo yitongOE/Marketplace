@@ -57,16 +57,16 @@
   </main>
 
   <!-- ====== Leaderboard Overlay ====== -->
-  <div id="leaderboard-overlay" class="overlay hidden" aria-hidden="true">
-    <div class="overlay-panel leaderboard-panel">
+  <div id="lb-overlay" class="overlay hidden" aria-hidden="true">
+    <div class="overlay-panel lb-panel">
 
       <!-- Header -->
-      <header class="overlay-header leaderboard-header">
-        <h2 id="leaderboard-title">LEADERBOARD</h2>
+      <header class="overlay-header lb-header">
+        <h2 id="lb-title">LEADERBOARD</h2>
       </header>
 
       <!-- Content -->
-      <div id="leaderboard-content" class="overlay-content leaderboard-content">
+      <div id="lb-content" class="overlay-content lb-content">
 
         <!-- ===== Top 3 Podium ===== -->
         <div class="lb-podium" id="lb-podium">
@@ -86,9 +86,9 @@
       </div>
 
       <!-- Footer -->
-      <footer class="overlay-footer leaderboard-footer">
-        <button id="leaderboard-close" class="overlay-btn">Close</button>
-        <button id="leaderboard-switch" class="overlay-btn primary">Switch Game</button>
+      <footer class="overlay-footer lb-footer">
+        <button id="lb-close" class="overlay-btn">Close</button>
+        <button id="lb-play" class="overlay-btn primary">Play</button>
       </footer>
 
     </div>
@@ -99,6 +99,7 @@
   <script src="scripts/leaderboardData.js"></script>
   <script src="scripts/marketplace.js"></script>
 
+  <!-- Only display mobile preview when using desktop browser -->
   <script>
     if (window.innerWidth >= 768) {
       window.location.href = "mobile-preview.html";

@@ -11,17 +11,26 @@ const noResults = document.getElementById("no-results");
 const feed = document.querySelector(".feed");
 
 // Leaderboard
-const lbOverlay = document.getElementById("leaderboard-overlay");
-const lbTitle = document.getElementById("leaderboard-title");
-const lbContent = document.getElementById("leaderboard-content");
-const lbCloseBtn = document.getElementById("leaderboard-close");
-const lbSwitchBtn = document.getElementById("leaderboard-switch");
+const lbOverlay = document.getElementById("lb-overlay");
+const lbTitle = document.getElementById("lb-title");
+const lbContent = document.getElementById("lb-content");
+const lbCloseBtn = document.getElementById("lb-close");
+const lbPlayBtn = document.getElementById("lb-play");
 
 //#endregion
 
 // ====== Variables ======
+
 const TOTAL_CHAPTERS = 6;
-const LESSONS_PER_CHAPTER = 5;
+//const LESSONS_PER_CHAPTER = 5;
+const userdata_username = "username (You)"
+let curGameToOpen = null;
+
+// ====== General Logics ======
+
+function openGameURL(game) {
+  window.top.location.href = game.url;
+}
 
 //#region ====== Draw Game Card ======
 
@@ -58,16 +67,16 @@ function renderLogo(game, index) {
 // progress = completed chapters (0..6)
 // Display always "Lesson xx–xx" (1–5 ... 26–30)
 // If completedChapters == 6, still display last range 26–30.
-function getLessonRange(completedChapters) {
-  const chapterIndex = Math.min(
-    Math.max(completedChapters, 0),
-    TOTAL_CHAPTERS - 1
-  );
+// function getLessonRange(completedChapters) {
+//   const chapterIndex = Math.min(
+//     Math.max(completedChapters, 0),
+//     TOTAL_CHAPTERS - 1
+//   );
 
-  const start = chapterIndex * LESSONS_PER_CHAPTER + 1;
-  const end = start + LESSONS_PER_CHAPTER - 1;
-  return { start, end };
-}
+//   const start = chapterIndex * LESSONS_PER_CHAPTER + 1;
+//   const end = start + LESSONS_PER_CHAPTER - 1;
+//   return { start, end };
+// }
 
 // Make sure the number of completed chapters is legal
 function clampChapters(n) {
@@ -153,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
     filteredGames.forEach((game, index) => {
       const hasProgress = typeof game.userdata_progress === "number";
       const completedChapters = clampChapters(hasProgress ? game.userdata_progress : 0);
-      const range = getLessonRange(completedChapters);
+      //const range = getLessonRange(completedChapters);
 
       const card = document.createElement("article");
       card.className = "card";
@@ -171,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="progress-wrap">
               <div class="progress" style="${hasProgress ? "" : "display:none"}" aria-label="lesson progress">
                 <div class="progress-label">
-                  <span>Lesson ${range.start}–${range.end}</span>
+                  <span>Level ${game.userdata_progress}</span>
                   <span>${completedChapters}/${TOTAL_CHAPTERS}</span>
                 </div>
 
@@ -208,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Click on icon to open game url
       const icon = card.querySelector(".icon");
       icon.onclick = () => {
-        window.location.href = game.url;
+        openGameURL(game);
       };
 
       // Add enter animation with stagger delay
@@ -243,12 +252,12 @@ document.addEventListener("DOMContentLoaded", () => {
 // Sort all users scores
 function getSortedScores(game) {
   const base = leaderboardData[game.id].filter(
-    p => p.name !== "You" && !p.isPlayer
+    p => p.name !== userdata_username && !p.isPlayer
   );
 
   return [
     ...base,
-    { name: "You", score: game.userdata_score, isPlayer: true }
+    { name: userdata_username, score: game.userdata_score, isPlayer: true }
   ].sort((a, b) => b.score - a.score);
 }
 
@@ -279,6 +288,7 @@ function getAvatarUrl(name){
 // Draw entire leaderbaord
 function openLeaderboard(game, rank) {
   lbTitle.textContent = `${game.title} · Leaderboard`;
+  curGameToOpen = game;
 
   const data = buildLeaderboard(game);
   
@@ -360,13 +370,13 @@ function openLeaderboard(game, rank) {
 function closeLeaderboard(){
   lbOverlay.classList.add("hidden");
   lbOverlay.setAttribute("aria-hidden", "true");
+  curGameToOpen = null;
 }
 
 lbCloseBtn.onclick = closeLeaderboard;
 
-lbSwitchBtn.onclick = () => {
-  closeLeaderboard();
-  //TODO：switch to oher games
+lbPlayBtn.onclick = () => {
+  openGameURL(curGameToOpen);
 };
 
 //#endregion

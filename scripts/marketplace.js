@@ -424,4 +424,15 @@ lbPlayBtn.onclick = () => {
   openGameURL(curGameToOpen);
 };
 
+// Tap outside of Leaderboard to close it
+lbOverlay.addEventListener("click", () => {
+  closeLeaderboard();
+});
+
+const lbPanel = document.querySelector(".lb-panel");
+
+lbPanel.addEventListener("click", (e) => {
+  e.stopPropagation();
+});
+
 //#endregion
